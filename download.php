@@ -2,7 +2,7 @@
 #Fazer o download
 function fazer_download() {
     #Dia atual
-    $data = date('d.m');
+    $data = date('Y-m-d');
     #URL para acesso
     $url = "https://www.limeira.sp.gov.br/sitenovo/downloads/coronavirus/planilha_de_casos/";
     #Buscar o arquivo com base no DOM da pagina e colocar em TXT

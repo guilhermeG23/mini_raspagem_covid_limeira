@@ -19,8 +19,31 @@ function fazer_download() {
     shell_exec("wget {$down}");
     #Se o arquivo existe agora na maquina, renomeia ele e substitui o atual
     if (file_exists($arquivo)) {
-        #Fazendo o download e colocando onde eu quero
-        rename($arquivo, "{$caminho}covid.png");
+            rename($arquivo, "{$caminho}covid.jpeg");
+            #Arrumando a orientacao da imagem
+            $infoFoto = exif_read_data("{$caminho}covid.jpeg");
+            if (!empty($infoFoto['Orientation'])) {
+                $alvo = imagecreatefromjpeg("{$caminho}covid.jpeg");
+                switch ($infoFoto['Orientation']) {
+                        case 1:
+                                $alvo = imagerotate($alvo, 180, 0);
+                                break;
+                        case 3:
+                                $alvo = imagerotate($alvo, -180, 0);
+                                break;
+                        case 6:
+                                $alvo = imagerotate($alvo, 90, 0);
+                                break;
+                        case 8:
+                                $alvo = imagerotate($alvo, -90, 0);
+                                break;
+
+                }
+                #Final
+                imagejpeg($alvo, "{$caminho}covid.jpeg");
+                #Destroi temporario
+                imagedestroy($alvo);
+        }
     }
 }
 #Liga a funcao

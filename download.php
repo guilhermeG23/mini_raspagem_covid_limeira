@@ -30,9 +30,6 @@ function fazer_download() {
                         case 1:
                                 $alvo = imagerotate($alvo, 180, 0);
                                 break;
-                        case 3:
-                                $alvo = imagerotate($alvo, -180, 0);
-                                break;
                         case 6:
                                 $alvo = imagerotate($alvo, 90, 0);
                                 break;
